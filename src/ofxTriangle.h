@@ -35,7 +35,11 @@ typedef struct
 class ofxTriangle {
     public :
 
-	ofxTriangle(){}
+	ofxTriangle(){
+        nTriangles = 0;
+        delobject = NULL;
+    }
+    
 	~ofxTriangle(){}
 #ifdef USE_OPENCV
 	// Triangulate a openCV blob
@@ -45,16 +49,21 @@ class ofxTriangle {
 
 	ofPoint getTriangleCenter(ofPoint *tr);
 	bool isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p);
-
+    
 	void draw();
 	void draw(float r, float g, float b);
-
+    
 	void draw(float x, float y);
+    void draw(float x, float y, bool fill);
+    
+    void draw(float x, float y, float r, float g, float b);
+    void draw(float x, float y, float r, float g, float b, float alpha);
+    void draw(float x, float y, float r, float g, float b, float alpha, bool fill);
+    
 	void clear();
 
 
 	Delaunay* delobject;
-
 	int nTriangles;
 	vector <ofxTriangleData> triangles;
 

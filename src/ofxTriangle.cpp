@@ -100,6 +100,14 @@ bool ofxTriangle::isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p)
 	return counter % 2 != 0;
 }
 
+void ofxTriangle::draw() {
+    for (int i=0; i<nTriangles; i++){
+        ofDrawTriangle(triangles[i].a.x, triangles[i].a.y,
+                       triangles[i].b.x, triangles[i].b.y,
+                       triangles[i].c.x, triangles[i].c.y);
+    }
+}
+
 void ofxTriangle::draw(float x, float y) {
     ofPushMatrix();
     ofTranslate(x, y, 0);
@@ -107,8 +115,17 @@ void ofxTriangle::draw(float x, float y) {
     ofPopMatrix();
 }
 
-void ofxTriangle::draw() {
-	draw(ofRandom(0, 255),ofRandom(0, 255),ofRandom(0, 255));
+void ofxTriangle::draw(float x, float y, bool fill) {
+    ofPushMatrix();
+    ofTranslate(x, y, 0);
+    
+    if (fill) {
+        ofFill();
+    } else {
+        ofNoFill();
+    }
+    draw();
+    ofPopMatrix();
 }
 
 void ofxTriangle::draw(float r, float g, float b) {
@@ -116,8 +133,57 @@ void ofxTriangle::draw(float r, float g, float b) {
 	
     for (int i=0; i<nTriangles; i++){
         ofSetColor(r,g,b);
-        ofTriangle( triangles[i].a.x, triangles[i].a.y,
-				   triangles[i].b.x, triangles[i].b.y,
-				   triangles[i].c.x, triangles[i].c.y);
+        ofDrawTriangle(triangles[i].a.x, triangles[i].a.y,
+                       triangles[i].b.x, triangles[i].b.y,
+                       triangles[i].c.x, triangles[i].c.y);
     }
+}
+
+void ofxTriangle::draw(float x, float y, float r, float g, float b) {
+    ofPushMatrix();
+    ofTranslate(x, y, 0);
+    
+    ofFill();
+	
+    for (int i=0; i<nTriangles; i++){
+        ofSetColor(r,g,b);
+        ofDrawTriangle(triangles[i].a.x, triangles[i].a.y,
+                       triangles[i].b.x, triangles[i].b.y,
+                       triangles[i].c.x, triangles[i].c.y);
+    }
+    ofPopMatrix();
+}
+
+void ofxTriangle::draw(float x, float y, float r, float g, float b, float alpha) {
+    ofPushMatrix();
+    ofTranslate(x, y, 0);
+    
+    ofFill();
+	
+    for (int i=0; i<nTriangles; i++){
+        ofSetColor(r,g,b,alpha);
+        ofDrawTriangle(triangles[i].a.x, triangles[i].a.y,
+                       triangles[i].b.x, triangles[i].b.y,
+                       triangles[i].c.x, triangles[i].c.y);
+    }
+    ofPopMatrix();
+}
+
+void ofxTriangle::draw(float x, float y, float r, float g, float b, float alpha, bool fill) {
+    ofPushMatrix();
+    ofTranslate(x, y, 0);
+    
+    if (fill) {
+        ofFill();
+    } else {
+        ofNoFill();
+    }
+    
+    for (int i=0; i<nTriangles; i++){
+        ofSetColor(r,g,b,alpha);
+        ofDrawTriangle(triangles[i].a.x, triangles[i].a.y,
+                       triangles[i].b.x, triangles[i].b.y,
+                       triangles[i].c.x, triangles[i].c.y);
+    }
+    ofPopMatrix();
 }
