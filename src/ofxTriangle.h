@@ -24,9 +24,9 @@ using namespace tpp;
 
 typedef struct
 {
-    ofPoint a;
-    ofPoint b;
-    ofPoint c;
+    glm::vec3 a;
+    glm::vec3 b;
+    glm::vec3 c;
 
     float area;
 
@@ -41,14 +41,19 @@ class ofxTriangle {
     }
     
 	~ofxTriangle(){}
+    
 #ifdef USE_OPENCV
 	// Triangulate a openCV blob
 	void triangulate(ofxCvBlob &cvblob, int resolution = 50);
 #endif
-	void triangulate(vector<ofPoint> contour, int resolution = 50);
-
-	ofPoint getTriangleCenter(ofPoint *tr);
-	bool isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p);
+    
+	//void triangulate(vector<ofPoint> contour, int resolution = 50);
+    void triangulate(vector<glm::vec3> contour, int resolution = 50);
+    
+	//ofPoint getTriangleCenter(ofPoint *tr);
+    glm::vec3 getTriangleCenter(glm::vec3 *tr);
+	//bool isPointInsidePolygon(ofPoint *polygon,int N, ofPoint p);
+    bool isPointInsidePolygon(glm::vec3 *polygon,int N, glm::vec3 p);
     
 	void draw();
 	void draw(float r, float g, float b);
